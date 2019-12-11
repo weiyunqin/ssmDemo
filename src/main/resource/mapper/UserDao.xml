@@ -13,6 +13,12 @@
     WHERE
     login_id = #{userId}
     </select>
+    <select id="findAll" resultType="User" parameterType="String">
+    SELECT
+    *
+    FROM
+    `user`
+    </select>
 
     <!--增加语句-->
     <insert id="add" parameterType="User">
