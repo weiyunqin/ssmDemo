@@ -54,6 +54,36 @@
             cache: false,   //不用缓存
             success: function (data) {  //请求成功，http状态码为200。返回的数据已经打包在data中了。
                 if (data.code == 1) {   //获判断json数据中的code是否为1，登录的用户名和密码匹配，通过效验，登陆成功
+                    window.location.href = data.data.nextUrl;     //这里拿到服务器返回的地址，然后进行跳转操作
+                    <%--window.location.href = "<%=request.getContextPath()%>/mvc/home";    //跳转到主页--%>
+                } else {    //登录不成功
+                    alert(data.msg);    //弹出对话框，提示返回的错误信息
+                    $("#u").focus();
+                }
+            }
+        });
+    }
+
+    function webReg() {   //定义一个名为webLogin的js函数（在java中我们称呼函数为方法）
+        var loginId = $("#user").val();
+        var name = $("#name").val();
+        var pwd = $("#passwd").val();
+        $.ajax({    //使用jquery下面的ajax开启网络请求
+            type: "POST",   //http请求方式为POST
+            url: '<%=request.getContextPath()%>/userAction/reg',  //请求接口的地址
+            data: {
+                loginId: loginId,
+                name: name,
+                pwd: pwd,
+                sex: 1
+            },  //存放的数据，服务器接口字段为loginId和pwd，分别对应用户登录名和密码
+            dataType: 'json',   //当这里指定为json的时候，获取到了数据后会自动解析的，只需要 返回值.字段名称 就能使用了
+            cache: false,   //不用缓存
+                //请求成功，http状态码为200。返回的数据已经打包在data中了。
+            success: function (data) {
+                console.log('请求成功');
+                if (data.code == 1) {   //获判断json数据中的code是否为1，登录的用户名和密码匹配，通过效验，登陆成功
+                    // window.location.href = data.data.nextUrl;     //这里拿到服务器返回的地址，然后进行跳转操作
                     window.location.href = "<%=request.getContextPath()%>/mvc/home";    //跳转到主页
                 } else {    //登录不成功
                     alert(data.msg);    //弹出对话框，提示返回的错误信息
@@ -62,6 +92,7 @@
             }
         });
     }
+
 </script>
 
 <html>
@@ -115,144 +146,116 @@
                           method="post">
                         <input type="hidden" name="did" value="0"/>
                         <input type="hidden" name="to" value="log"/>
-
                         <div class="uinArea" id="uinArea">
                             <label class="input-tips" for="u">帐号：</label>
-
                             <div class="inputOuter" id="uArea">
-
                                 <input type="text" id="u" name="loginId" class="inputstyle"/>
                             </div>
                         </div>
                         <div class="pwdArea" id="pwdArea">
                             <label class="input-tips" for="p">密码：</label>
-
                             <div class="inputOuter" id="pArea">
-
                                 <input type="password" id="p" name="pwd" class="inputstyle"/>
                             </div>
                         </div>
-
                         <div style="padding-left:50px;margin-top:20px;">
                             <input type="button"
                                    id="btn_login"
                                    value="登 录"
                                    onclick="webLogin();"    <%--此处调用我们上面写的js的登录方法--%>
-                            style="width:150px;"
-                            class="button_blue"/>
+                                   style="width:150px;"
+                                   class="button_blue"/>
                         </div>
                     </form>
                 </div>
-
             </div>
-
         </div>
         <!--登录end-->
     </div>
 
     <!--注册-->
     <div class="qlogin" id="qlogin" style="display: none; ">
-
         <div class="web_login">
-            <form action="<%=request.getContextPath()%>/userAction/reg"
-                  name="form2"
-                  id="regUser"
+            <form action=""
+            <%-- 此处必须删掉form表单的地址--%>
+                  name="loginform"
                   accept-charset="utf-8"
+                  id="reg_form"
+                  class="regForm"
                   method="post">
                 <input type="hidden" name="to" value="reg"/>
                 <input type="hidden" name="did" value="0"/>
                 <ul class="reg_form" id="reg-ul">
-                    <div id="userCue" class="cue">快速注册请注意格式</div>
+<%--                    <div id="userCue" class="cue">快速注册请注意格式</div>--%>
                     <li>
-
                         <label for="user" class="input-tips2">用户名：</label>
-
                         <div class="inputOuter2">
                             <input type="text" id="user" name="loginId" maxlength="16" class="inputstyle2"/>
                         </div>
-
                     </li>
                     <li>
-
                         <label for="user" class="input-tips2">姓名：</label>
-
                         <div class="inputOuter2">
                             <input type="text" id="name" name="name" maxlength="16" class="inputstyle2"/>
                         </div>
-
                     </li>
-
                     <li>
                         <label for="passwd" class="input-tips2">密码：</label>
-
                         <div class="inputOuter2">
                             <input type="password" id="passwd" name="pwd" maxlength="16" class="inputstyle2"/>
                         </div>
-
                     </li>
-                    <li>
-                        <label for="passwd2" class="input-tips2">确认密码：</label>
-
-                        <div class="inputOuter2">
-                            <input type="password" id="passwd2" name="" maxlength="16" class="inputstyle2"/>
-                        </div>
-
-                    </li>
-
-                    <li>
-                        <label for="cellNumber" class="input-tips2">手机号：</label>
-
-                        <div class="inputOuter2">
-
-                            <input type="text" id="cellNumber" name="cellNumber" maxlength="18" class="inputstyle2"/>
-                        </div>
-
-                    </li>
-
-                    <li>
-                        <label for="sex" class="input-tips2">性别：</label>
-
-                        <div class="inputOuter2">
-
-                            <input type="text" id="sex" name="sex" maxlength="18" class="inputstyle2"/>
-                        </div>
-
-                    </li>
-                    <li>
-                        <label for="duty" class="input-tips2">duty：</label>
-
-                        <div class="inputOuter2">
-
-                            <input type="text" id="duty" name="duty" maxlength="18" class="inputstyle2"/>
-                        </div>
-
-                    </li>
-
-                    <li>
-                        <label for="age" class="input-tips2">年龄：</label>
-
-                        <div class="inputOuter2">
-
-                            <input type="age" id="age" name="age" maxlength="18" class="inputstyle2"/>
-                        </div>
-
-                    </li>
-
+<%--                    <li>--%>
+<%--                        <label for="passwd2" class="input-tips2">确认密码：</label>--%>
+<%--                        <div class="inputOuter2">--%>
+<%--                            <input type="password" id="passwd2" name="" maxlength="16" class="inputstyle2"/>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <label for="cellNumber" class="input-tips2">手机号：</label>--%>
+<%--                        <div class="inputOuter2">--%>
+<%--                            <input type="text" id="cellNumber" name="cellNumber" maxlength="18" class="inputstyle2"/>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <label for="sex" class="input-tips2">性别：</label>--%>
+<%--                        <div class="inputOuter2">--%>
+<%--                            <input type="text" id="sex" name="sex" maxlength="18" class="inputstyle2"/>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <label for="duty" class="input-tips2">duty：</label>--%>
+<%--                        <div class="inputOuter2">--%>
+<%--                            <input type="text" id="duty" name="duty" maxlength="18" class="inputstyle2"/>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <label for="age" class="input-tips2">年龄：</label>--%>
+<%--                        <div class="inputOuter2">--%>
+<%--                            <input type="age" id="age" name="age" maxlength="18" class="inputstyle2"/>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
                     <li>
                         <div class="inputArea">
-                            <input type="button" id="reg" style="margin-top:10px;margin-left:85px;" class="button_blue"
-                                   value="同意协议并注册"/> <a href="#" class="zcxy" target="_blank">注册协议</a>
+                            <input type="button"
+                                   id="reg"
+                                   style="margin-top:10px;margin-left:85px;"
+                                   class="button_blue"
+                                   onclick="webReg();"    <%--此处调用我们上面写的js的登录方法--%>
+                                   value="同意协议并注册"/>
+<%--                            <input type="button"--%>
+<%--                                   id="btn_login"--%>
+<%--                                   value="登 录"--%>
+<%--                                   onclick="reg();"    &lt;%&ndash;此处调用我们上面写的js的登录方法&ndash;%&gt;--%>
+<%--                                   style="width:150px;"--%>
+<%--                                   class="button_blue"/>--%>
+                            <a href="#" class="zcxy" target="_blank">注册协议</a>
                         </div>
-
                     </li>
                     <div class="cl"></div>
                 </ul>
             </form>
-
-
         </div>
-
-
     </div>
     <!--注册end-->
 </div>

@@ -105,31 +105,31 @@ $(document).ready(function() {
 		//});
 
 
-		if ($('#passwd').val().length < pwdmin) {
-			$('#passwd').focus();
-			$('#userCue').html("<font color='red'><b>×密码不能小于" + pwdmin + "位</b></font>");
-			return false;
-		}
-		if ($('#passwd2').val() != $('#passwd').val()) {
-			$('#passwd2').focus();
-			$('#userCue').html("<font color='red'><b>×两次密码不一致！</b></font>");
-			return false;
-		}
-
-		var sqq = /^1[34578]\d{9}$/;
-		if (!sqq.test($('#cellNumber').val()) || $('#cellNumber').val().length < 5 || $('#cellNumber').val().length > 12) {
-			$('#cellNumber').focus().css({
-				border: "1px solid red",
-				boxShadow: "0 0 2px red"
-			});
-			$('#userCue').html("<font color='red'><b>×手机号格式不正确</b></font>");return false;
-		} else {
-			$('#cellNumber').css({
-				border: "1px solid #D7D7D7",
-				boxShadow: "none"
-			});
-
-		}
+		// if ($('#passwd').val().length < pwdmin) {
+		// 	$('#passwd').focus();
+		// 	$('#userCue').html("<font color='red'><b>×密码不能小于" + pwdmin + "位</b></font>");
+		// 	return false;
+		// }
+		// if ($('#passwd2').val() != $('#passwd').val()) {
+		// 	$('#passwd2').focus();
+		// 	$('#userCue').html("<font color='red'><b>×两次密码不一致！</b></font>");
+		// 	return false;
+		// }
+		//
+		// var sqq = /^1[34578]\d{9}$/;
+		// if (!sqq.test($('#cellNumber').val()) || $('#cellNumber').val().length < 5 || $('#cellNumber').val().length > 12) {
+		// 	$('#cellNumber').focus().css({
+		// 		border: "1px solid red",
+		// 		boxShadow: "0 0 2px red"
+		// 	});
+		// 	$('#userCue').html("<font color='red'><b>×手机号格式不正确</b></font>");return false;
+		// } else {
+		// 	$('#cellNumber').css({
+		// 		border: "1px solid #D7D7D7",
+		// 		boxShadow: "none"
+		// 	});
+		//
+		// }
 
 		$('#regUser').submit();
 	});

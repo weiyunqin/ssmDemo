@@ -1,6 +1,7 @@
 package com.gky.service.impl;
 
 import com.gky.domain.User;
+import org.junit.Assert;
 import org.junit.Test;
 import com.gky.test.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,14 @@ public class UserServiceImplTest extends BaseTest{
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void a() {
+        String qq = "qq";
+        String ww = "ww";
+        qq = ww;
+//        Assert.assertNotEquals(qq, ww);
+        System.out.println(qq == ww);
+    }
+
 }

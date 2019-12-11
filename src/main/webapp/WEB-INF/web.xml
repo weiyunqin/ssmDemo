@@ -49,10 +49,10 @@
     <!--<url-pattern>/fonts/*</url-pattern>-->
   </servlet-mapping>
 <!--    通过网上查阅资料，我们看到大部分人都是把404页面提示信息提交给Servelt自己管理，我们也依样画瓢，在web.xml中配置-->
-    <error-page>
-        <error-code>404</error-code>
-        <location>/static/view/404.html</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>404</error-code>-->
+<!--        <location>/static/view/404.html</location>-->
+<!--    </error-page>-->
 
     <!-- spring框架提供的字符集过滤器 -->
     <!-- spring Web MVC框架提供了org.springframework.web.filter.CharacterEncodingFilter用于解决POST方式造成的中文乱码问题  -->

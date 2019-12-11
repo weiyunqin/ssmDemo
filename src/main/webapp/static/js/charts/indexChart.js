@@ -30,7 +30,7 @@ var labelFromatter = {
             }
         }
     },
-}
+};
 var labelBottom = {
     normal : {
         color: '#ccc',

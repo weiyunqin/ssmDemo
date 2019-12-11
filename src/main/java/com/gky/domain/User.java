@@ -17,6 +17,7 @@ public class User implements Serializable {
     private String cellNumber;  //手机号
     private String photoUrl;    //头像地址
     private boolean used = true;   //是否可用,默认值是true
+    private String nextUrl ;   //下一步的地址
 
     @Override
     public String toString() {
@@ -30,7 +31,16 @@ public class User implements Serializable {
                 ", cellNumber='" + cellNumber + '\'' +
                 ", photoUrl='" + photoUrl + '\'' +
                 ", used=" + used +
+                ", nextUrl='" + nextUrl + '\'' +
                 '}';
+    }
+
+    public String getNextUrl() {
+        return nextUrl;
+    }
+
+    public void setNextUrl(String nextUrl) {
+        this.nextUrl = nextUrl;
     }
 
     public String getName() {

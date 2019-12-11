@@ -26,15 +26,15 @@ public class MainController {
         return "login";
     }
 
-    /**
-     * 注册页面
-     *
-     * @return
-     */
-    @RequestMapping(value = "/register.do", method = RequestMethod.GET)
-    public String register() {
-        return "login";
-    }
+//    /**
+//     * 注册页面
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "/register.do", method = RequestMethod.GET)
+//    public String register() {
+//        return "login";
+//    }
 
     /**
      * 后台主页

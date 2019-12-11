@@ -25,6 +25,7 @@ public class GsonUtils {
      * 自定义TypeAdapter ,null对象将被解析成空字符串
      */
     private static final TypeAdapter<String> STRING = new TypeAdapter<String>() {
+        @Override
         public String read(JsonReader reader) {
             try {
                 if (reader.peek() == JsonToken.NULL) {
@@ -38,6 +39,7 @@ public class GsonUtils {
             return "";
         }
 
+        @Override
         public void write(JsonWriter writer, String value) {
             try {
                 if (value == null) {

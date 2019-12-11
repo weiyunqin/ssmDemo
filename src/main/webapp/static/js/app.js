@@ -195,7 +195,7 @@ function($) {
 //this full screen
 var toggle_fullscreen = function () {
 
-}
+};
 
 function executeFunctionByName(functionName, context /*, args */) {
   var args = [].slice.call(arguments).splice(2);
@@ -234,7 +234,7 @@ var changeptype = function(){
 
   }
   toggle_slimscroll(".slimscrollleft");
-}
+};
 
 
 var debounce = function(func, wait, immediate) {
@@ -251,7 +251,7 @@ var debounce = function(func, wait, immediate) {
     if (callNow) result = func.apply(context, args);
     return result;
   };
-}
+};
 
 function resizeitems(){
   if($.isArray(resizefunc)){
