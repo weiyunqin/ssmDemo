@@ -39,6 +39,21 @@
             }
         });
     }
+    $("#log-table-body").append(    //log-table-body是我们列表的body的ID
+        "<tr><td>" + data.data[i].id + "</td><td>"
+        + data.data[i].ipAddrV4 + "</td><td>01/01/2016</td><td>"
+        + data.data[i].osName + "</td><td><span class=\"label label-danger\">"
+        + data.data[i].description + "</span></td><td>"
+        + data.data[i].sessionId + "</td><td>"
+        + data.data[i].broName + "</td></tr>");
+    //注意：格式（标签结构）一定要和以前的一样，否则列表会走样的==
+
+
+
+
+
+
+
 
 
 </script>
@@ -465,66 +480,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Adminto Admin v1</td>
-                                    <td>01/01/2016</td>
-                                    <td>26/04/2016</td>
-                                    <td><span class="label label-danger">已发布</span></td>
-                                    <td>Coderthemes</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Adminto Frontend v1</td>
-                                    <td>01/01/2016</td>
-                                    <td>26/04/2016</td>
-                                    <td><span class="label label-success">已发布</span></td>
-                                    <td>Adminto admin</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Adminto Admin v1.1</td>
-                                    <td>01/05/2016</td>
-                                    <td>10/05/2016</td>
-                                    <td><span class="label label-pink">未开展</span></td>
-                                    <td>Coderthemes</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Adminto Frontend v1.1</td>
-                                    <td>01/01/2016</td>
-                                    <td>31/05/2016</td>
-                                    <td><span class="label label-purple">进行中</span>
-                                    </td>
-                                    <td>Adminto admin</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Adminto Admin v1.3</td>
-                                    <td>01/01/2016</td>
-                                    <td>31/05/2016</td>
-                                    <td><span class="label label-warning">即将开始</span></td>
-                                    <td>Coderthemes</td>
-                                </tr>
-
-                                <tr>
-                                    <td>6</td>
-                                    <td>Adminto Admin v1.3</td>
-                                    <td>01/01/2016</td>
-                                    <td>31/05/2016</td>
-                                    <td><span class="label label-primary">即将开始</span></td>
-                                    <td>Adminto admin</td>
-                                </tr>
-
-                                <tr>
-                                    <td>7</td>
-                                    <td>Adminto Admin v1.3</td>
-                                    <td>01/01/2016</td>
-                                    <td>31/05/2016</td>
-                                    <td><span class="label label-primary">即将开始</span></td>
-                                    <td>Adminto admin</td>
-                                </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -547,5 +502,23 @@
    data-am-offcanvas="{target: '#admin-offcanvas'}"><!--<i class="fa fa-bars" aria-hidden="true"></i>--></a>
 
 </body>
-
+<!-- 注意了，我这里是把自动执行的js代码放到 html加载完成后的 -->
+<script type="application/javascript">
+    $.ajax({
+        type: "GET",
+        url: '<%=request.getContextPath()%>/actionLog/findLogList?pageNum=1&pageSize=10',
+        dataType: 'json',   //当这里指定为json的时候，获取到了数据后会自己解析的，只需要 返回值.字段名称 就能使用了
+        cache: false,
+        success: function (data) {
+            if (data.code == 1) {
+                for (var i = 0; i < 10; i++) {
+                    $("#log-table-body").append("<tr><td>" + data.data[i].id + "</td><td>"
+                        + data.data[i].ipAddrV4 + "</td><td>01/01/2016</td><td>"
+                        + data.data[i].description + "</span></td><td>"
+                        + data.data[i].sessionId + "</td><td>");
+                }
+            }
+        }
+    });
+</script>
 </html>
